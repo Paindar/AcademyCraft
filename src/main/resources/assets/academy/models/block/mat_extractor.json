@@ -1,0 +1,14 @@
+{
+  "__xconfgen":false,
+  "parent": "block/cube",
+  "textures":
+  {
+    "down":"academy:blocks/mat_extractor_other",
+    "east":"academy:blocks/mat_extractor_other",
+    "north":"academy:blocks/mat_extractor_front",
+    "particle":"academy:blocks/mat_extractor_front",
+    "south":"academy:blocks/mat_extractor_other",
+    "up":"academy:blocks/mat_extractor_top",
+    "west":"academy:blocks/mat_extractor_other"
+  }
+}

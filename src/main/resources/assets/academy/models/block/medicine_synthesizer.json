@@ -1,0 +1,14 @@
+{
+  "__xconfgen":false,
+  "parent": "block/cube",
+  "textures":
+  {
+    "down":"academy:blocks/med_synth_bottom",
+    "east":"academy:blocks/med_synth_right",
+    "north":"academy:blocks/med_synth_front",
+    "particle":"academy:blocks/med_synth_front",
+    "south":"academy:blocks/med_synth_other",
+    "up":"academy:blocks/med_synth_top",
+    "west":"academy:blocks/med_synth_other"
+  }
+}

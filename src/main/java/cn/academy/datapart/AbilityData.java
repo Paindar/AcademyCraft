@@ -4,7 +4,6 @@ import cn.academy.ACConfig;
 import cn.academy.ability.Category;
 import cn.academy.ability.CategoryManager;
 import cn.academy.ability.Skill;
-import cn.academy.analytic.events.AnalyticLevelUpEvent;
 import cn.academy.event.ability.*;
 import cn.lambdalib2.datapart.DataPart;
 import cn.lambdalib2.datapart.EntityData;
@@ -128,7 +127,7 @@ public class AbilityData extends DataPart<EntityPlayer> {
 
         if(level != lv) {
             if(level<lv){
-                MinecraftForge.EVENT_BUS.post(new AnalyticLevelUpEvent(getEntity()));
+                ;//todo level up event
             }
             level = lv;
             expAddedThisLevel = 0;

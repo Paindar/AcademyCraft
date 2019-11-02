@@ -1,0 +1,14 @@
+{
+  "__xconfgen":false,
+  "parent": "block/cube",
+  "textures":
+  {
+    "down":"academy:blocks/rev_processor_back",
+    "east":"academy:blocks/rev_processor_back",
+    "north":"academy:blocks/rev_processor_front",
+    "particle":"academy:blocks/rev_processor_front",
+    "south":"academy:blocks/rev_processor_back",
+    "up":"academy:blocks/rev_processor_top",
+    "west":"academy:blocks/rev_processor_back"
+  }
+}
