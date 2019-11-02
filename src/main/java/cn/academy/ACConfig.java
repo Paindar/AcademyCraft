@@ -78,14 +78,17 @@ public final class ACConfig {
             log.error("An error occured parsing custom config", ex);
             lastError = ex.toString();
         }
+        updateConfigValue();
     }
 
     public static void updateConfig(Config cfg)
     {
         if(cfg==null)
             __init();
-        else
-            config=cfg;
+        else {
+            config = cfg;
+            updateConfigValue();
+        }
     }
 
     @StateEventCallback
