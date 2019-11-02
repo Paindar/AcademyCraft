@@ -226,8 +226,10 @@ public class AbilityData extends DataPart<EntityPlayer> {
     }
 
     public float getLevelProgress() {
-        float threshold = getLevelTotalExp() * (level == 4 ? 1.333f : 0.666f);
-        return threshold == 0 ? 1 : Math.min(1, expAddedThisLevel / threshold);
+//        float threshold = getLevelTotalExp() * (level == 4 ? 1.333f : 0.666f);
+//        return threshold == 0 ? 1 : Math.min(1, expAddedThisLevel / threshold);
+        CPData data=CPData.get(getEntity());
+        return data.getAddMaxCP()/data.getMaxAddCP(level);
     }
 
     public boolean canLevelUp() {
