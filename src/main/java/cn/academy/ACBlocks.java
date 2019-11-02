@@ -48,6 +48,7 @@ public class ACBlocks {
     public static final BlockWindGenBase windgen_base = new BlockWindGenBase();
     public static final BlockWindGenMain windgen_main = new BlockWindGenMain();
     public static final BlockWindGenPillar windgen_pillar = new BlockWindGenPillar();
+    public static final BlockRevProcessor revProcessor = new BlockRevProcessor();
 
     public static final ItemBlock item_ability_interferer = new ItemBlock(ability_interferer);
     public static final ItemBlock item_cat_engine = new ItemBlock(cat_engine);
@@ -70,6 +71,7 @@ public class ACBlocks {
     public static final ItemBlock item_windgen_base = new ItemBlock(windgen_base);
     public static final ItemBlock item_windgen_main = new ItemBlock(windgen_main);
     public static final ItemBlock item_windgen_pillar = new ItemBlock(windgen_pillar);
+    public static final ItemBlock item_rev_processor = new ItemBlock(revProcessor);
 
     @RegistryCallback
     private static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -159,6 +161,10 @@ public class ACBlocks {
         windgen_pillar.setTranslationKey("ac_windgen_pillar");
         windgen_pillar.setCreativeTab(cn.academy.AcademyCraft.cct);
         event.getRegistry().register(windgen_pillar);
+        revProcessor.setRegistryName("academy:rev_processor");
+        revProcessor.setTranslationKey("rev_processor");
+        revProcessor.setCreativeTab(cn.academy.AcademyCraft.cct);
+        event.getRegistry().register(revProcessor);
     }
 
     @RegistryCallback
@@ -227,6 +233,9 @@ public class ACBlocks {
         item_windgen_pillar.setRegistryName("academy:windgen_pillar");
         item_windgen_pillar.setTranslationKey("ac_windgen_pillar");
         event.getRegistry().register(item_windgen_pillar);
+        item_rev_processor.setRegistryName("academy:rev_processor");
+        item_rev_processor.setTranslationKey("rev_processor");
+        event.getRegistry().register(item_rev_processor);
 
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
             registerItemRenderers();
@@ -256,6 +265,7 @@ public class ACBlocks {
         ModelLoader.setCustomModelResourceLocation(item_windgen_base, 0, new ModelResourceLocation(windgen_base.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(item_windgen_main, 0, new ModelResourceLocation(windgen_main.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(item_windgen_pillar, 0, new ModelResourceLocation(windgen_pillar.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item_rev_processor, 0, new ModelResourceLocation(revProcessor.getRegistryName(), "inventory"));
     }
 
 }
