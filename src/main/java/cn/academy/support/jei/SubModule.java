@@ -13,6 +13,7 @@ import java.util.Collection;
 public class SubModule implements IModPlugin {
     public FusorRecipeCategory fusorRecipeCategory;
     public MetalFormerRecipeCategory mfRecipeCategory;
+    public RevProcessorRecipeCategory rpRecipeCategory;
 
     public SubModule() {
     }
@@ -22,6 +23,7 @@ public class SubModule implements IModPlugin {
     {
         addMachineRecipes(registry, FusorRecipeCategory.recipeWrapper, fusorRecipeCategory);
         addMachineRecipes(registry, MetalFormerRecipeCategory.recipeWrapper, mfRecipeCategory);
+        addMachineRecipes(registry, RevProcessorRecipeCategory.recipeWrapper, rpRecipeCategory);
     }
 
     @Override
@@ -32,6 +34,9 @@ public class SubModule implements IModPlugin {
 
         mfRecipeCategory = new MetalFormerRecipeCategory(guiHelper);
         registry.addRecipeCategories(mfRecipeCategory);
+
+        rpRecipeCategory = new RevProcessorRecipeCategory(guiHelper);
+        registry.addRecipeCategories(rpRecipeCategory);
     }
 
     private void addMachineRecipes(IModRegistry registry, Collection<IRecipeWrapper> wrappers, IACRecipeCategory category) {

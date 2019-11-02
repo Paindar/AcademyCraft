@@ -420,7 +420,7 @@ ac.gui.common.prop.altitude=海拔
 # 技能树
 ac.skill_tree.dev_developing=开发中...
 ac.skill_tree.dev_successful=开发成功。
-ac.skill_tree.dev_failed=开发失败。
+ac.skill_tree.dev_failed=开发失败，能量不足。
 ac.skill_tree.progress=进度
 ac.skill_tree.noenergy=机器能量不足。
 ac.skill_tree.condition_fail=开发技能所需条件没有满足。
@@ -497,3 +497,42 @@ ac.converter.desc_template=转换%s到%s
 
 # About App
 ac.about.donators_info=排名不分先后
+
+# 药物系统
+
+item.powder.name=粉末
+item.empty_med_bottle.name=空药瓶
+item.medicine_bottle.name=药瓶
+
+tile.mat_extractor.name=药粉析取机
+tile.medicine_synthesizer.name=药物合成机
+tile.rev_processor.name=逆向处理机
+
+ac.medicine.prop_type.targ=对象
+ac.medicine.prop_type.app=生效方式
+ac.medicine.prop_type.str=强度
+ac.medicine.prop_type.var=浮动
+
+ac.medicine.props.targ_life=生命
+ac.medicine.props.targ_cp=CP
+ac.medicine.props.targ_overload=过载
+ac.medicine.props.targ_jump=跳跃提升
+ac.medicine.props.targ_cooldown=技能冷却
+ac.medicine.props.targ_move_speed=移动速度
+ac.medicine.props.targ_disposed=无效
+ac.medicine.props.targ_attack=力量
+ac.medicine.props.str_mild=微弱
+ac.medicine.props.str_weak=较弱
+ac.medicine.props.str_normal=适度
+ac.medicine.props.str_strong=较强
+ac.medicine.props.str_infinity=无限
+ac.medicine.props.var_infinity=无限
+ac.medicine.props.var_neutralize=中和
+ac.medicine.props.var_desens=脱敏
+ac.medicine.props.var_fluct=波动
+ac.medicine.props.var_stabilize=稳定
+
+ac.medicine.props.app_instant_incr=即刻增加
+ac.medicine.props.app_instant_decr=即刻降低
+ac.medicine.props.app_cont_incr=持续增加
+ac.medicine.props.app_cont_decr=持续降低
