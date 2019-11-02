@@ -47,7 +47,7 @@ object AbilityInterf {
 }
 
 @RegTileEntity
-class TileAbilityInterferer extends TileReceiverBase("ability_interferer",1,10000, IFConstants.LATENCY_MK1) with ISidedInventory {
+class TileAbilityInterferer extends TileReceiverBase("ability_interferer",1,10000, IFConstants.LATENCY_MK3) with ISidedInventory {
   import AbilityInterf._
 
   val scheduler = new TickScheduler
