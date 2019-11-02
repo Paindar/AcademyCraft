@@ -65,7 +65,7 @@ class VecReflectionContext(p: EntityPlayer) extends Context(p, VecReflection) {
   @Listener(channel=MSG_MADEALIVE, side=Array(Side.SERVER))
   def s_makeAlive(): Unit = {
     MinecraftForge.EVENT_BUS.register(this)
-    ctx.consume(overloadToKeep, 0)
+    ctx.consume(0, 0)
     overloadKeep = ctx.cpData.getOverload
   }
 
@@ -76,7 +76,7 @@ class VecReflectionContext(p: EntityPlayer) extends Context(p, VecReflection) {
 
   @Listener(channel=MSG_TICK, side=Array(Side.SERVER))
   def s_tick(): Unit = {
-    if(ctx.cpData.getOverload < overloadKeep) ctx.cpData.setOverload(overloadKeep)
+    //if(ctx.cpData.getOverload < overloadKeep) ctx.cpData.setOverload(overloadKeep)
     val range = 4
     val entities = WorldUtils.getEntities(player, range, new Predicate[Entity] {
       override def test(t: Entity): Boolean = true
