@@ -16,6 +16,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 apply plugin: 'scala'
 apply plugin: 'idea'
+apply plugin: 'maven'
 
 ext.configFile = file "build.properties"
 configFile.withReader {
@@ -70,11 +71,6 @@ repositories {
     maven {
         name = "chickenbones"
         url = "http://chickenbones.net/maven"
-    }
-    maven {
-        name = "private"
-        //url = "http://139.199.206.70:8081/nexus/content/groups/public"
-        url = "http://git.project-gearbox.net:9010/content/repositories/thirdparty"
     }
     maven {
         name = "ic2"
@@ -224,15 +220,5 @@ extractRangemapReplacedMain.dependsOn compileScala
 artifacts {
     archives deobfJar
 }
-
-uploadArchives {
-    repositories {
-        maven {
-            url "http://git.project-gearbox.net:9010/content/repositories/thirdparty"
-            credentials {
-                username usr
-                password pswd
-            }
-        }
-    }
-}
+    
+install.dependsOn build
