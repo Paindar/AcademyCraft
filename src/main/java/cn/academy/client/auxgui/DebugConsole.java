@@ -4,6 +4,8 @@ import cn.academy.ability.Category;
 import cn.academy.ability.Skill;
 import cn.academy.datapart.AbilityData;
 import cn.academy.datapart.CPData;
+import cn.academy.medicine.api.BuffData;
+import cn.academy.medicine.api.BuffRuntimeData;
 import cn.academy.util.ACKeyManager;
 import cn.academy.Resources;
 import cn.lambdalib2.auxgui.AuxGui;
@@ -64,7 +66,7 @@ public class DebugConsole extends AuxGui {
         });
     }
 
-    enum State { NONE, NORMAL, SHOW_EXP }
+    enum State { NONE, NORMAL, SHOW_EXP, BUFF}
 
     State state = State.NONE;
     
@@ -83,6 +85,7 @@ public class DebugConsole extends AuxGui {
         
         AbilityData aData = AbilityData.get(player);
         CPData cpData = CPData.get(player);
+        BuffData buffData = BuffData.apply(player);
 
         switch (state) {
         case NORMAL:
@@ -119,6 +122,14 @@ public class DebugConsole extends AuxGui {
                 }
             }
             break;
+            case BUFF:
+                texts.add(new Text(String.format("BuffData.resistance: %.2f%%", buffData.getResistance() * 100)));
+                texts.add(new Text(String.format("Buff list(%d):",buffData.rawData().size())));
+                for (BuffRuntimeData data : buffData.rawData())
+                {
+                    texts.add(new Text(" "+data.buff.toString()));
+                }
+                break;
         }
         
         iter(texts, 10.5f, 10.5f, 0.2);
