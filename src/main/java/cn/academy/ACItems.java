@@ -23,8 +23,6 @@ public class ACItems {
 
     public static final cn.academy.item.ItemApp app_freq_transmitter = new cn.academy.item.ItemApp("freq_transmitter");
 
-    public static final cn.academy.item.ItemApp app_media_player = new cn.academy.item.ItemApp("media_player");
-
     public static final cn.academy.item.ItemApp app_skill_tree = new cn.academy.item.ItemApp("skill_tree");
 
     public static final net.minecraft.item.Item brain_component = new net.minecraft.item.Item();
@@ -69,8 +67,6 @@ public class ACItems {
 
     public static final cn.academy.item.ItemMatterUnit matter_unit = new cn.academy.item.ItemMatterUnit();
 
-    public static final cn.academy.item.MediaItem media_item = new cn.academy.item.MediaItem();
-
     public static final net.minecraft.item.Item needle = new net.minecraft.item.Item();
 
     public static final net.minecraft.item.Item reinforced_iron_plate = new net.minecraft.item.Item();
@@ -97,10 +93,6 @@ public class ACItems {
         app_freq_transmitter.setTranslationKey("ac_apps");
         app_freq_transmitter.setCreativeTab(cn.academy.AcademyCraft.cct);
         event.getRegistry().register(app_freq_transmitter);
-        app_media_player.setRegistryName("academy:app_media_player");
-        app_media_player.setTranslationKey("ac_apps");
-        app_media_player.setCreativeTab(cn.academy.AcademyCraft.cct);
-        event.getRegistry().register(app_media_player);
         app_skill_tree.setRegistryName("academy:app_skill_tree");
         app_skill_tree.setTranslationKey("ac_apps");
         app_skill_tree.setCreativeTab(cn.academy.AcademyCraft.cct);
@@ -191,10 +183,6 @@ public class ACItems {
         matter_unit.setTranslationKey("ac_matter_unit");
         matter_unit.setCreativeTab(cn.academy.AcademyCraft.cct);
         event.getRegistry().register(matter_unit);
-        media_item.setRegistryName("academy:media_item");
-        media_item.setTranslationKey("ac_media_item");
-        media_item.setCreativeTab(cn.academy.AcademyCraft.cct);
-        event.getRegistry().register(media_item);
         needle.setRegistryName("academy:needle");
         needle.setTranslationKey("ac_needle");
         needle.setCreativeTab(cn.academy.AcademyCraft.cct);
@@ -243,7 +231,6 @@ public class ACItems {
     @SideOnly(Side.CLIENT)
     private static void registerItemRenderers() {
         ModelLoader.setCustomModelResourceLocation(app_freq_transmitter, 0, new ModelResourceLocation("academy:app_freq_transmitter", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(app_media_player, 0, new ModelResourceLocation("academy:app_media_player", "inventory"));
         ModelLoader.setCustomModelResourceLocation(app_skill_tree, 0, new ModelResourceLocation("academy:app_skill_tree", "inventory"));
         ModelLoader.setCustomModelResourceLocation(brain_component, 0, new ModelResourceLocation("academy:brain_component", "inventory"));
         ModelLoader.setCustomModelResourceLocation(calc_chip, 0, new ModelResourceLocation("academy:calc_chip", "inventory"));
@@ -269,10 +256,7 @@ public class ACItems {
         ModelLoader.setCustomModelResourceLocation(mat_core, 1, new ModelResourceLocation("academy:mat_core_1", "inventory"));
         ModelLoader.setCustomModelResourceLocation(matter_unit, 1, new ModelResourceLocation("academy:matter_unit_phase_liquid_0", "inventory"));
         ModelLoader.setCustomModelResourceLocation(matter_unit, 0, new ModelResourceLocation("academy:matter_unit", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(media_item, 0, new ModelResourceLocation("academy:media_0", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(media_item, 1, new ModelResourceLocation("academy:media_1", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(media_item, 2, new ModelResourceLocation("academy:media_2", "inventory"));
-        ModelLoader.setCustomModelResourceLocation(needle, 0, new ModelResourceLocation("academy:needle", "inventory"));
+       ModelLoader.setCustomModelResourceLocation(needle, 0, new ModelResourceLocation("academy:needle", "inventory"));
         ModelLoader.setCustomModelResourceLocation(reinforced_iron_plate, 0, new ModelResourceLocation("academy:reinforced_iron_plate", "inventory"));
         ModelLoader.setCustomModelResourceLocation(reso_crystal, 0, new ModelResourceLocation("academy:reso_crystal", "inventory"));
         ModelLoader.setCustomModelResourceLocation(resonance_component, 0, new ModelResourceLocation("academy:resonance_component", "inventory"));

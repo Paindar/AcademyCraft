@@ -210,12 +210,6 @@ shaped(academy:app_skill_tree) {
     [academy:info_component]
 }
 
-shaped(academy:app_media_player) {
-    [noteblock, noteblock, noteblock]
-    [nil,       academy:data_chip, nil]
-    [nil,       academy:info_component, nil]
-}
-
 shaped(academy:app_freq_transmitter) {
     [academy:resonance_component]
     [academy:data_chip]
