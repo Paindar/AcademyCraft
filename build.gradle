@@ -46,7 +46,7 @@ compileJava.options.encoding = "UTF-8"
 compileScala.options.encoding = "UTF-8"
 
 minecraft {
-    version = "1.12.2-14.23.4.2705"
+    version = "1.12.2-14.23.5.2768"
     runDir = "run"
 
     // the mappings can be changed at any time, and must be in the following format.
