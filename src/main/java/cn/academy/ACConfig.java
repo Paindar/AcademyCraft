@@ -111,6 +111,7 @@ public final class ACConfig {
 
     public static void updateConfigValue()
     {
+        MinecraftForge.EVENT_BUS.post(new ConfigUpdateEvent(ConfigUpdateEvent.Phase.START));
         for(Map.Entry<String, Field> entry : valList.entrySet())
         {
             Class kls = entry.getValue().getType();
@@ -121,7 +122,7 @@ public final class ACConfig {
                 throw new RuntimeException(String.format("Cannot update config value \"%s\" from \"%s\"",
                         entry.getKey(), entry.getValue()));
         }
-        MinecraftForge.EVENT_BUS.post(new ConfigUpdateEvent());
+        MinecraftForge.EVENT_BUS.post(new ConfigUpdateEvent(ConfigUpdateEvent.Phase.END));
     }
 
     public static List<Map.Entry<String, String>> printConfig()
@@ -197,6 +198,25 @@ public final class ACConfig {
 
         };
         valReader.put(int[].class, base);
+    }
+
+    static{
+        BiConsumer<String, Field> base = (s, field) -> {
+            List<Double> values = instance().getDoubleList(s);
+            try
+            {
+                double[] val = (double[]) field.get(null);
+                for(int i=0;i<values.size();i++)
+                {
+                    val[i] = values.get(i);
+                }
+            } catch (IllegalAccessException e)
+            {
+                e.printStackTrace();
+            }
+
+        };
+        valReader.put(double[].class, base);
     }
     static{
         BiConsumer<String, Field> base = (s, field) -> {
