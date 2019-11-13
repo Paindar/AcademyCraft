@@ -536,3 +536,11 @@ ac.medicine.props.app_instant_incr=即刻增加
 ac.medicine.props.app_instant_decr=即刻降低
 ac.medicine.props.app_cont_incr=持续增加
 ac.medicine.props.app_cont_decr=持续降低
+
+item.cons_armor_helmet.name=束能金属头盔
+item.cons_armor_chest.name=束能金属胸甲
+item.cons_armor_leggings.name=束能金属护腿
+item.cons_armor_boots.name=束能金属靴
+ac.item.armor.level.tip=等级 %d/5
+ac.item.armor.watered.tip=虚相液灌注 %d/%d
+ac.item.armor.offset.tip=立场增强 %.2f

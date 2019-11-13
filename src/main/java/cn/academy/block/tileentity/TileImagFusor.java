@@ -10,6 +10,8 @@ import cn.academy.crafting.ImagFusorRecipes;
 import cn.academy.crafting.ImagFusorRecipes.IFRecipe;
 import cn.academy.item.ItemMatterUnit;
 import cn.academy.energy.IFConstants;
+import cn.academy.item.armor.ACArmorHelper;
+import cn.academy.item.armor.ItemACArmor;
 import cn.academy.support.EnergyItemHelper;
 import cn.lambdalib2.registry.mc.RegTileEntity;
 import cn.lambdalib2.s11n.network.NetworkMessage;
@@ -116,7 +118,10 @@ public class TileImagFusor extends TileReceiverBase implements IFluidHandler, IS
                     if(!inventory[SLOT_INPUT].isEmpty()) {
                         IFRecipe recipe = ImagFusorRecipes.INSTANCE.getRecipe(inventory[SLOT_INPUT]);
                         if(recipe != null) {
-                            startWorking(recipe);
+                            if (!(recipe.consumeType.getItem() instanceof ItemACArmor)||ACArmorHelper.instance.getArmorLevel(inventory[SLOT_INPUT])<5)
+                            {
+                                startWorking(recipe);
+                            }
                         }
                     }
                 }
@@ -193,10 +198,23 @@ public class TileImagFusor extends TileReceiverBase implements IFluidHandler, IS
         }
         
         if(!isActionBlocked()) {
-            workProgress += WORK_SPEED;
-            if(workProgress >= 1.0) {
-                endWorking();
+            if(currentRecipe.consumeType.getItem() instanceof ItemACArmor)
+            {
+                int amount = Math.min(tank.getFluidAmount(),50);
+                tank.drain(amount, true);
+                ACArmorHelper.instance.water(inventory[SLOT_INPUT], amount);
+                workProgress = ACArmorHelper.instance.getProgress(inventory[SLOT_INPUT]);
+                if(ACArmorHelper.instance.getArmorLevel(inventory[SLOT_INPUT])>=5)
+                    abortWorking();
             }
+            else
+            {
+                workProgress += WORK_SPEED;
+                if(workProgress >= 1.0) {
+                    endWorking();
+                }
+            }
+
         }
     }
     

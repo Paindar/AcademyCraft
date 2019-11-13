@@ -269,3 +269,28 @@ shaped(academy:magnetic_coil) {
     [academy:constraint_plate, academy:reso_crystal, academy:constraint_plate]
     [plateIron , diamond     , plateIron ]
 }
+
+shaped(academy:cons_armor_helmet){
+    [academy:constraint_plate, academy:constraint_plate, academy:constraint_plate]
+    [academy:constraint_plate, academy:energy_convert_component, academy:constraint_plate]
+    [nil,      academy:matter_unit,   nil]
+}
+
+shaped(academy:cons_armor_chest){
+    [academy:constraint_plate, nil                 , academy:constraint_plate]
+    [academy:constraint_plate, academy:energy_convert_component, academy:constraint_plate]
+    [academy:constraint_plate, academy:crystal_pure,   academy:constraint_plate]
+}
+
+shaped(academy:cons_armor_leggings){
+    [academy:constraint_plate, academy:reso_crystal, academy:constraint_plate]
+    [academy:constraint_plate, academy:energy_convert_component, academy:constraint_plate]
+    [academy:constraint_plate, academy:matter_unit,   academy:constraint_plate]
+}
+
+shaped(academy:cons_armor_boots){
+    [academy:constraint_plate, academy:matter_unit, academy:constraint_plate]
+    [academy:constraint_plate, academy:energy_convert_component, academy:constraint_plate]
+    [nil, nil,   nil]
+}
+

@@ -4,6 +4,7 @@ import cn.academy.ability.Category;
 import cn.academy.ability.Skill;
 import cn.academy.datapart.AbilityData;
 import cn.academy.datapart.CPData;
+import cn.academy.item.armor.ACArmorHelper;
 import cn.academy.medicine.api.BuffData;
 import cn.academy.medicine.api.BuffRuntimeData;
 import cn.academy.util.ACKeyManager;
@@ -102,6 +103,7 @@ public class DebugConsole extends AuxGui {
                 texts.add(new Text("CPData.addMaxCP: " + cpData.getAddMaxCP()));
                 texts.add(new Text("CPData.interfering: " + cpData.isInterfering()));
                 texts.add(new Text(String.format(" AData.levelProgress: %.2f%%", aData.getLevelProgress() * 100)));
+                texts.add(new Text(String.format(" AIM Enhancement: %.1f", ACArmorHelper.instance.getEntityEnhancement(player))));
             }
             break;
         case SHOW_EXP:

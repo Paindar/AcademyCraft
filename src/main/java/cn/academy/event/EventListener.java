@@ -5,8 +5,11 @@ import cn.academy.block.tileentity.TileGeneratorBase;
 import cn.academy.block.tileentity.TileReceiverBase;
 import cn.academy.datapart.CPData;
 import cn.academy.energy.api.block.IWirelessNode;
+import cn.academy.event.ability.CalcEvent;
+import cn.academy.item.armor.ACArmorHelper;
 import cn.lambdalib2.registry.StateEventCallback;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -132,6 +135,26 @@ public class EventListener {
             NBTTagCompound tag = item.getTagCompound().getCompoundTag("Academy");
             ((IWirelessNode) tile).setEnergy(tag.getDouble("Energy"));
         }
+    }
+
+    @SubscribeEvent
+    public void onSkillCauseDamage(CalcEvent.SkillAttack evt)
+    {
+        ACArmorHelper helper = ACArmorHelper.instance;
+        //y = 1.7689*(delta*0.01)^2 x>0
+        //y = 1 - 2.25*(delta*0.01)^2
+        EntityPlayer player = evt.player;
+        if(evt.target instanceof EntityLivingBase)
+        {
+            EntityLivingBase target = (EntityLivingBase) evt.target;
+            double delta = (helper.getEntityEnhancement(player) - helper.getEntityEnhancement(target))/1000;
+            if(delta > 3e-3)
+                evt.value = (float)(1f + (1.7689*delta*delta))*evt.value;
+            else if(delta < -3e-3)
+                evt.value = (float)(1f - (2.25  *delta*delta))*evt.value;
+        }
+        else
+            throw new RuntimeException();
     }
 
     @GetACCfgValue(path="ac.ability.data.lose_cp_amount")

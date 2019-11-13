@@ -21,6 +21,10 @@ public class MFIFRecipes {
         ImagFusorRecipes ifr = ImagFusorRecipes.INSTANCE;
         ifr.addRecipe(new ItemStack(ACItems.crystal_low), 3000, new ItemStack(ACItems.crystal_normal));
         ifr.addRecipe(new ItemStack(ACItems.crystal_normal), 8000, new ItemStack(ACItems.crystal_pure));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_head), 1, new ItemStack(ACItems.cons_armor_head));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_chest), 1, new ItemStack(ACItems.cons_armor_chest));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_legs), 1, new ItemStack(ACItems.cons_armor_legs));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_feet), 1, new ItemStack(ACItems.cons_armor_feet));
 
         MetalFormerRecipes mfr = MetalFormerRecipes.INSTANCE;
         mfr.add(new ItemStack(ACItems.imag_silicon_ingot), new ItemStack(ACItems.wafer, 2), Mode.INCISE);
