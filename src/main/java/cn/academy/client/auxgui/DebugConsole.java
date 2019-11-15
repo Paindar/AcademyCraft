@@ -129,7 +129,7 @@ public class DebugConsole extends AuxGui {
                 texts.add(new Text(String.format("Buff list(%d):",buffData.rawData().size())));
                 for (BuffRuntimeData data : buffData.rawData())
                 {
-                    texts.add(new Text(" "+data.buff.toString()));
+                    texts.add(new Text(String.format(" %s (%s)",data.buff.toString(), data.applyData.toString())));
                 }
                 break;
         }

@@ -17,7 +17,7 @@ public class BuffCooldownRecovery extends BuffPerTick {
     public BuffCooldownRecovery(float percentPerTick)
     {
         this();
-        this.perTick = 4*percentPerTick/30;
+        this.perTick = 10*percentPerTick;
     }
 
     private Map<CooldownData.SkillCooldown,Float> accumMap = new HashMap<>();

@@ -107,7 +107,7 @@ public class Properties {
     public Target Targ_Life = new Target(){
         @Override
         public void apply(EntityPlayer player, MedicineApplyInfo data){
-            float amt = 5 * data.strengthModifier;
+            float amt = 5 * (1+data.strengthModifier);
             BuffData buffData = BuffData.apply(player);
             float sens = buffData.getResistance();
             if (sens >= 1 && RandUtils.nextFloat() * sens >1)
@@ -124,7 +124,7 @@ public class Properties {
             } else { // Continuous recovery
                 int time = ContApplyTime;
 
-                BuffHeal buff = new BuffHeal((data.method.incr?1:-1)*amt);
+                BuffHeal buff = new BuffHeal((data.method.incr?1:-1)*amt/time);
 
                 buffData.addBuff(buff, (int) (time*sens));
             }
@@ -143,7 +143,7 @@ public class Properties {
             CPData cpData = CPData.get(player);
             BuffData buffData = BuffData.apply(player);
             float sens = buffData.getResistance();
-            float baseValue = cpData.getMaxCP() * 0.1f * data.strengthModifier;
+            float baseValue = cpData.getMaxCP() * 0.1f * (1+data.strengthModifier);
             if (sens >= 1 && RandUtils.nextFloat() * sens >1)
             {
                 baseValue*=-1;//药敏度过高导致过敏反应
@@ -154,7 +154,7 @@ public class Properties {
             else {
                 int time = ContApplyTime;
                 float perTick = baseValue;
-                buffData.addBuff(new BuffCPRecovery(perTick), (int) (time*sens));
+                buffData.addBuff(new BuffCPRecovery(1.2f*perTick/time), (int) (time*sens));
             }
             buffData.setResistance(sens*data.sensitiveRatio);
         }
@@ -171,7 +171,7 @@ public class Properties {
             CPData cpData = CPData.get(player);
             BuffData buffData = BuffData.apply(player);
             float sens = buffData.getResistance();
-            float amt = cpData.getMaxOverload() * 0.1f * data.strengthModifier*sens;
+            float amt = cpData.getMaxOverload() * 0.1f * (data.strengthModifier+1)*sens;
             if (sens >= 1 && RandUtils.nextFloat() * sens >1)
             {
                 amt*=-1;//药敏度过高导致过敏反应
@@ -180,7 +180,7 @@ public class Properties {
             if (data.method.instant) {
                 cpData.setOverload(cpData.getOverload() - amt);
             } else {
-                BuffData.apply(player).addBuff(new BuffOverloadRecovery(amt), ContApplyTime);
+                BuffData.apply(player).addBuff(new BuffOverloadRecovery(1.2f*amt/ContApplyTime), ContApplyTime);
             }
             buffData.setResistance(sens*data.sensitiveRatio);
         }
@@ -204,7 +204,7 @@ public class Properties {
             if(data.method == Apply_Instant_Incr) {
 
                 int time = ContApplyTime;
-                PotionEffect eff = new PotionEffect(Potion.getPotionById(8), (int) (time* sens), strenghToLevel(data.strengthType));
+                PotionEffect eff = new PotionEffect(Potion.getPotionFromResourceLocation("jump_boost"), (int) (time* sens), strenghToLevel(data.strengthType));
                 player.addPotionEffect(eff);
             }
             else if (data.method == Apply_Continuous_Incr)
@@ -241,7 +241,7 @@ public class Properties {
                 }
             }
             else {
-                BuffData.apply(player).addBuff(new BuffCooldownRecovery(baseValue), (int) (ContApplyTime*sens));
+                BuffData.apply(player).addBuff(new BuffCooldownRecovery(1.2f*baseValue/ContApplyTime), (int) (ContApplyTime*sens));
             }
             buffData.setResistance(sens*data.sensitiveRatio);
 
@@ -266,7 +266,7 @@ public class Properties {
             }
             if(data.method.instant) {
                 int time = ContApplyTime;
-                Potion potion = (data.method.incr)? Potion.getPotionById(1): Potion.getPotionById(2);
+                Potion potion = (data.method.incr)? Potion.getPotionFromResourceLocation("speed"): Potion.getPotionById(2);
                 player.addPotionEffect(new PotionEffect(potion, (int) (time*sens), strenghToLevel(data.strengthType)));
             }
             else
@@ -416,7 +416,7 @@ public class Properties {
     public ApplyMethod Apply_Continuous_Incr = new ApplyMethod(){{
             incr = true;
             instant = false;
-            strength = 0.01f;
+            strength = 1.5f;
 
             id = "cont_incr";
     }};
@@ -424,7 +424,7 @@ public class Properties {
     public ApplyMethod Apply_Continuous_Decr = new ApplyMethod(){{
             incr = false;
             instant = false;
-            strength = -0.005f;
+            strength = -0.75f;
 
             id = "cont_decr";
     }};

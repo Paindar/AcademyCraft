@@ -28,4 +28,10 @@ public class BuffApplyData {
     {
         return maxTicks_;
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("%d/%d",tickLeft, maxTicks_);
+    }
 }

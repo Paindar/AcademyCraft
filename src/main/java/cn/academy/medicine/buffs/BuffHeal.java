@@ -12,7 +12,7 @@ public class BuffHeal extends BuffPerTick {
     public BuffHeal(){super("heal");}
     public BuffHeal(float healPerTick){
         this();
-        perTick = 4*healPerTick/30;
+        perTick = healPerTick*10;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class BuffHeal extends BuffPerTick {
         counter++;
         if (counter >10)
         {
-            counter=0;
+            counter-=10;
             if (perTick >= 0)
             {
                 player.heal(perTick);
@@ -56,6 +56,6 @@ public class BuffHeal extends BuffPerTick {
     @Override
     public String toString()
     {
-        return String.format("%s perTick:%f", "heal", perTick);
+        return super.toString();
     }
 }

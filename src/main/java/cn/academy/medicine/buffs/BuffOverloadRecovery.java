@@ -13,7 +13,7 @@ public class BuffOverloadRecovery extends BuffPerTick {
     public BuffOverloadRecovery(float perTick)
     {
         this();
-        this.perTick = 4*perTick/30;
+        this.perTick = 10*perTick;
     }
 
     @Override

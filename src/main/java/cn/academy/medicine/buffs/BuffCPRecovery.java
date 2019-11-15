@@ -12,7 +12,7 @@ public class BuffCPRecovery extends BuffPerTick {
     public BuffCPRecovery(){super("cp_recovery");}
     public BuffCPRecovery(float perTick){
         this();
-        this.perTick = 4*perTick/30;
+        this.perTick = 10*perTick;
     }
 
     @Override

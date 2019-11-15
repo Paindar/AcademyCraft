@@ -19,4 +19,10 @@ public abstract class BuffPerTick extends Buff {
         tag.setFloat("amt", perTick);
     }
 
+    @Override
+    public String toString()
+    {
+        return String.format("<%s>val:%.2f", id, perTick);
+    }
+
 }

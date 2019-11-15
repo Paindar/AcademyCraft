@@ -12,4 +12,10 @@ public class BuffRuntimeData {
         this.buff=buff;
         this.applyData=data;
     }
+
+    @Override
+    public String toString()
+    {
+        return buff.toString()  + applyData.toString();
+    }
 }
