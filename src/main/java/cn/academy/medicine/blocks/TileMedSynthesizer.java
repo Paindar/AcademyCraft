@@ -1,6 +1,7 @@
 package cn.academy.medicine.blocks;
 
 import cn.academy.block.tileentity.TileReceiverBase;
+import cn.academy.medicine.MedSynth;
 import cn.academy.medicine.MedicineApplyInfo;
 import cn.academy.medicine.Properties;
 import cn.academy.medicine.items.ItemMedicineBottle;
@@ -52,7 +53,7 @@ public class TileMedSynthesizer extends TileReceiverBase {
                         consEnergy = pullEnergy(ConsumePerTick) == ConsumePerTick;
                         if(consEnergy)
                         {
-                            synthesizing_ = false;
+                            synthesizing_ = canSynth();
                             progress_ = 0.0f;
                         }
                     }
@@ -194,9 +195,11 @@ public class TileMedSynthesizer extends TileReceiverBase {
             }
             else
             {
-                if (outputStack.getItem().equals(resultStack.getItem()) && outputStack.getCount()<outputStack.getMaxStackSize())
+                if (outputStack.getItem() instanceof ItemMedicineBottle
+                        && outputStack.getCount()<outputStack.getMaxStackSize()
+                        && MedSynth.compare(outputStack, resultStack))
                 {
-                    outputStack.grow(1);
+                    MedSynth.merge(outputStack, resultStack);
                 }
                 else
                     return false;

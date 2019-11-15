@@ -48,4 +48,11 @@ public class MedicineApplyInfo{
                 ((MedicineApplyInfo) o).strengthModifier == strengthModifier &&
                 ((MedicineApplyInfo) o).sensitiveRatio == sensitiveRatio;
     }
+
+    public boolean isSimilarly(MedicineApplyInfo o)
+    {
+        return o.target == target &&
+                o.method == method &&
+                o.strengthType == strengthType;
+    }
 }

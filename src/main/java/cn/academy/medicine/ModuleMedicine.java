@@ -44,7 +44,6 @@ public class ModuleMedicine {
         event.getRegistry().register(emptyBottle);
         medicineBottle.setRegistryName("academy:medicine_bottle");
         medicineBottle.setTranslationKey("medicine_bottle");
-        medicineBottle.setCreativeTab(AcademyCraft.cct);
         event.getRegistry().register(medicineBottle);
         itemMatExtractor.setRegistryName("academy:mat_extractor");
         itemMatExtractor.setTranslationKey("mat_extractor");

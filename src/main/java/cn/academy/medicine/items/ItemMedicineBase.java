@@ -35,6 +35,8 @@ public class ItemMedicineBase extends Item {
         if (info.target != Properties.instance.Targ_Disposed) {
             list.add(info.target.displayDesc() + " " + info.method.displayDesc());
             list.add(info.strengthType.displayDesc());
+            //test code
+            //list.add(String.format("Modifier:%f  Sensitive:%f", info.strengthModifier, info.sensitiveRatio));
         } else {
             list.add(TextFormatting.RED + Properties.instance.Targ_Disposed.displayDesc());
         }

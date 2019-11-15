@@ -43,12 +43,27 @@ public class MedSynth {
         try
         {
             MedicineApplyInfo info1 = readApplyInfo(stack1), info2 = readApplyInfo(stack2);
-            return info1.equals(info2);
+            return info1.isSimilarly(info2);
         }
         catch (IllegalArgumentException e)
         {
             return false;
         }
+    }
+
+    //Merge target into source
+    public static void merge(ItemStack source, ItemStack target)
+    {
+        MedicineApplyInfo info1 = readApplyInfo(source),
+            info2 = readApplyInfo(target);
+        float sensitive = info1.sensitiveRatio * source.getCount() + info2.sensitiveRatio * target.getCount();
+        sensitive /= ( source.getCount() + target.getCount());
+        float strength = info1.strengthModifier * source.getCount() + info2.strengthModifier * target.getCount();
+        strength /= ( source.getCount() + target.getCount());
+        info1.sensitiveRatio = sensitive;
+        info1.strengthModifier = strength;
+        writeApplyInfo(source, info1);
+        source.grow(target.getCount());
     }
 
 }
