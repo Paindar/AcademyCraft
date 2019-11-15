@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -51,9 +52,16 @@ public class AbilityContext {
      * @param damage The amount of damage applied (raw)
      */
     public void attack(Entity target, float damage) {
-        damage = CalcEvent.calc(new CalcEvent.SkillAttack(player, skill, target, damage));
+        CalcEvent.SkillAttack evt =new CalcEvent.SkillAttack(player, skill, target, damage);
+        boolean result = MinecraftForge.EVENT_BUS.post(evt);
+        damage = evt.value;
 
-        if (damage > 0 && (AbilityPipeline.canAttackPlayer() || (!(target instanceof EntityPlayer))) && canAttack(target)) {
+        if (damage > 0 && !result && (AbilityPipeline.canAttackPlayer() || (!(target instanceof EntityPlayer))) && canAttack(target)) {
+            double delta = (evt.sourceEnhancement-evt.targetEnhancement)/1000;
+            if(delta > 3e-3)
+                damage = (float)(1f + (1.7689*delta*delta))*damage;
+            else if(delta < -3e-3)
+                damage = (float)(1f - (2.25  *delta*delta))*damage;
             target.attackEntityFrom(new SkillDamageSource(player, skill), getFinalDamage(damage));
         }
     }

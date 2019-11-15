@@ -1,6 +1,8 @@
 package cn.academy.event.ability;
 
 import cn.academy.ability.Skill;
+import cn.academy.item.armor.ACArmorHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -62,11 +64,17 @@ public class CalcEvent<T> extends Event {
 
         public final Skill skill;
         public final Entity target;
+        public double sourceEnhancement=0, targetEnhancement=0;
 
         public SkillAttack(EntityPlayer player, Skill _skill, Entity _target, float initial) {
             super(player, initial);
             skill = _skill;
             target = _target;
+            if(_target instanceof EntityLivingBase)
+            {
+                sourceEnhancement = ACArmorHelper.instance.getEntityEnhancement(player);
+                targetEnhancement = ACArmorHelper.instance.getEntityEnhancement((EntityLivingBase) _target);
+            }
         }
 
     }

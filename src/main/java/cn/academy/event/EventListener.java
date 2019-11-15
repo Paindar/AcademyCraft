@@ -137,26 +137,6 @@ public class EventListener {
         }
     }
 
-    @SubscribeEvent
-    public void onSkillCauseDamage(CalcEvent.SkillAttack evt)
-    {
-        ACArmorHelper helper = ACArmorHelper.instance;
-        //y = 1.7689*(delta*0.01)^2 x>0
-        //y = 1 - 2.25*(delta*0.01)^2
-        EntityPlayer player = evt.player;
-        if(evt.target instanceof EntityLivingBase)
-        {
-            EntityLivingBase target = (EntityLivingBase) evt.target;
-            double delta = (helper.getEntityEnhancement(player) - helper.getEntityEnhancement(target))/1000;
-            if(delta > 3e-3)
-                evt.value = (float)(1f + (1.7689*delta*delta))*evt.value;
-            else if(delta < -3e-3)
-                evt.value = (float)(1f - (2.25  *delta*delta))*evt.value;
-        }
-        else
-            throw new RuntimeException();
-    }
-
     @GetACCfgValue(path="ac.ability.data.lose_cp_amount")
     private static double loseCPAmount = 0;
     @GetACCfgValue(path="ac.ability.data.lose_cp_per")
