@@ -119,6 +119,10 @@ public class CooldownData extends DataPart<EntityPlayer> {
         return getSub(ctrl, 0);
     }
 
+    public Map<Integer, SkillCooldown> rawData()
+    {
+        return cooldownMap;
+    }
     /**
      * @return The cooldown info for a skill. Always not null.
      */
@@ -166,6 +170,10 @@ public class CooldownData extends DataPart<EntityPlayer> {
 
         public int getTickLeft() {
             return tickLeft;
+        }
+
+        public void setTickLeft(int _tickLeft){
+            tickLeft = _tickLeft;
         }
 
         public int getMaxTick() {

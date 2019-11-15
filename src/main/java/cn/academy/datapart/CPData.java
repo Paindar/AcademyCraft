@@ -250,6 +250,14 @@ public class CPData extends DataPart<EntityPlayer> {
         return curOverload;
     }
 
+    public void setAddMaxOverload(float value) {
+        AbilityData aData = AbilityData.get(getEntity());
+        float max = getMaxAddOverload(aData.getLevel());
+        addMaxOverload = Math.min(max, value);
+
+        markDirty();
+    }
+
     public float getMaxOverload() {
         return maxOverload + addMaxOverload;
     }

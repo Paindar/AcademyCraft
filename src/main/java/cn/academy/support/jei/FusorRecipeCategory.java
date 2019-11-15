@@ -4,6 +4,7 @@ import cn.academy.ACBlocks;
 import cn.academy.AcademyCraft;
 import cn.academy.crafting.ImagFusorRecipes;
 import cn.academy.crafting.ImagFusorRecipes.IFRecipe;
+import cn.academy.item.armor.ItemACArmor;
 import cn.lambdalib2.util.RenderUtils;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -53,6 +54,8 @@ public class FusorRecipeCategory extends IACRecipeCategory
     private static List<IRecipeWrapper> loadCraftingRecipes() {
         List<IRecipeWrapper> lists = new ArrayList<>();
         for(IFRecipe r : ImagFusorRecipes.INSTANCE.getAllRecipe()) {
+            if (r.consumeType.getItem() instanceof ItemACArmor)
+                continue;
             lists.add(iIngredients -> {
                 iIngredients.setInput(ItemStack.class, r.consumeType);
                 iIngredients.setOutput(ItemStack.class, r.output);

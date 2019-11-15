@@ -21,6 +21,10 @@ public class MFIFRecipes {
         ImagFusorRecipes ifr = ImagFusorRecipes.INSTANCE;
         ifr.addRecipe(new ItemStack(ACItems.crystal_low), 3000, new ItemStack(ACItems.crystal_normal));
         ifr.addRecipe(new ItemStack(ACItems.crystal_normal), 8000, new ItemStack(ACItems.crystal_pure));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_head), 1, new ItemStack(ACItems.cons_armor_head));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_chest), 1, new ItemStack(ACItems.cons_armor_chest));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_legs), 1, new ItemStack(ACItems.cons_armor_legs));
+        ifr.addRecipe(new ItemStack(ACItems.cons_armor_feet), 1, new ItemStack(ACItems.cons_armor_feet));
 
         MetalFormerRecipes mfr = MetalFormerRecipes.INSTANCE;
         mfr.add(new ItemStack(ACItems.imag_silicon_ingot), new ItemStack(ACItems.wafer, 2), Mode.INCISE);
@@ -32,6 +36,15 @@ public class MFIFRecipes {
         mfr.add(new ItemStack(ACBlocks.item_constraint_metal), new ItemStack(ACItems.constraint_ingot, 2), Mode.REFINE);
         mfr.add(new ItemStack(ACBlocks.item_reso_ore), new ItemStack(ACItems.reso_crystal, 3), Mode.REFINE);
         mfr.add(new ItemStack(ACBlocks.item_crystal_ore), new ItemStack(ACItems.crystal_low, 4), Mode.REFINE);
+
+        RevProcRecipes rpr = RevProcRecipes.INSTANCE;
+        rpr.add(new ItemStack(ACBlocks.constraint_metal), new ItemStack(Blocks.IRON_ORE), 2000);
+        rpr.add(new ItemStack(ACItems.constraint_ingot), new ItemStack(Items.IRON_INGOT), 500);
+        rpr.add(new ItemStack(ACBlocks.item_imagsil_ore), new ItemStack(Blocks.SAND), 1200);
+        rpr.add(new ItemStack(ACBlocks.crystal_ore), new ItemStack(Blocks.QUARTZ_BLOCK,2), 300);
+        rpr.add(new ItemStack(ACItems.crystal_low), new ItemStack(Items.QUARTZ), 300);
+        rpr.add(new ItemStack(ACBlocks.reso_ore, 5), new ItemStack(Blocks.DIAMOND_BLOCK), 6000);
+        rpr.add(new ItemStack(ACItems.reso_crystal, 9), new ItemStack(Items.DIAMOND), 3000);
 
         addOreDictRefineRecipe("oreGold",new ItemStack(Items.GOLD_INGOT,2));
         addOreDictRefineRecipe("oreIron",new ItemStack(Items.IRON_INGOT,2));

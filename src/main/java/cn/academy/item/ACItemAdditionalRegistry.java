@@ -1,7 +1,6 @@
 package cn.academy.item;
 
 import cn.academy.ACItems;
-import cn.academy.misc.media.MediaManager;
 import cn.lambdalib2.registry.StateEventCallback;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -66,21 +65,9 @@ public class ACItemAdditionalRegistry {
             return stack;
         }
     };
-        ACLootItem itemFactor = new ACLootItem("induction_factor", ACItems.induction_factor, func, 10, 1);
+        ACLootItem itemFactor = new ACLootItem("induction_factor", ACItems.induction_factor, func, 100, 1);
         ACLootItem itemEmpty = ACLootItem.newEmpty(90,1);
         addLoots("name", 4, 4, itemFactor, itemEmpty);
-
-        LootFunction funcMedia = new LootFunction(DEFAULT_CONDS) {
-            @Override
-            public ItemStack apply(ItemStack stack, Random rand, LootContext context )
-            {
-                stack.setItemDamage(rand.nextInt(MediaManager.internalMedias().length()));
-                return stack;
-            }
-        };
-        ACLootItem itemMedia = new ACLootItem("music", ACItems.media_item, funcMedia,
-                10,1);
-        addLoots("music", 1,1, itemMedia, itemEmpty);
     }
     public static void addLoots(String poolName, int minValue, int maxValue, ACLootItem... entries)
     {

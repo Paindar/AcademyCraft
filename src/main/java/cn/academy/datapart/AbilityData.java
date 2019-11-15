@@ -4,7 +4,6 @@ import cn.academy.ACConfig;
 import cn.academy.ability.Category;
 import cn.academy.ability.CategoryManager;
 import cn.academy.ability.Skill;
-import cn.academy.analytic.events.AnalyticLevelUpEvent;
 import cn.academy.event.ability.*;
 import cn.lambdalib2.datapart.DataPart;
 import cn.lambdalib2.datapart.EntityData;
@@ -128,7 +127,7 @@ public class AbilityData extends DataPart<EntityPlayer> {
 
         if(level != lv) {
             if(level<lv){
-                MinecraftForge.EVENT_BUS.post(new AnalyticLevelUpEvent(getEntity()));
+                ;//todo level up event
             }
             level = lv;
             expAddedThisLevel = 0;
@@ -227,8 +226,10 @@ public class AbilityData extends DataPart<EntityPlayer> {
     }
 
     public float getLevelProgress() {
-        float threshold = getLevelTotalExp() * (level == 4 ? 1.333f : 0.666f);
-        return threshold == 0 ? 1 : Math.min(1, expAddedThisLevel / threshold);
+//        float threshold = getLevelTotalExp() * (level == 4 ? 1.333f : 0.666f);
+//        return threshold == 0 ? 1 : Math.min(1, expAddedThisLevel / threshold);
+        CPData data=CPData.get(getEntity());
+        return data.getAddMaxCP()/data.getMaxAddCP(level);
     }
 
     public boolean canLevelUp() {

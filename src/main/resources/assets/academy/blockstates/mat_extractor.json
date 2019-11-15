@@ -1,0 +1,28 @@
+{
+  "defaults":
+  {
+    "model":"cube",
+    "textures":
+    {
+      "down":"academy:blocks/mat_extractor_other",
+      "east":"academy:blocks/mat_extractor_other",
+      "north":"academy:blocks/mat_extractor_front",
+      "particle":"academy:blocks/mat_extractor_front",
+      "south":"academy:blocks/mat_extractor_other",
+      "up":"academy:blocks/mat_extractor_top",
+      "west":"academy:blocks/mat_extractor_other"
+    }
+  },
+  "forge_marker":1,
+  "variants":
+  {
+    "facing":
+    {
+      "east": {"y":90},
+      "north": {"y":0},
+      "south": {"y":180},
+      "west": {"y":270}
+    },
+    "inventory":[{}]},
+  "__xconfgen":false
+}

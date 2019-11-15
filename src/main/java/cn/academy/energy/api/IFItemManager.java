@@ -17,7 +17,6 @@ public final class IFItemManager implements EnergyItemManager {
 
     @Override
     public double getEnergy(ItemStack stack) {
-        ImagEnergyItem item = (ImagEnergyItem) stack.getItem();
         return StackUtils.loadTag(stack).getDouble("energy");
     }
 

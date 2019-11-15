@@ -1,5 +1,6 @@
 package cn.academy.crafting;
 
+import cn.academy.item.armor.ItemACArmor;
 import cn.lambdalib2.s11n.network.NetworkS11n;
 import cn.lambdalib2.s11n.network.NetworkS11n.ContextException;
 import cn.lambdalib2.s11n.network.NetworkS11n.NetS11nAdaptor;
@@ -61,7 +62,11 @@ public class ImagFusorRecipes {
         }
         
         public boolean matches(ItemStack input) {
-            return consumeType.getItem() == input.getItem() && consumeType.getItemDamage() == input.getItemDamage();
+            if (consumeType.getItem() != input.getItem())
+                return false;
+            if(consumeType.getItem() instanceof ItemACArmor)
+                return true;
+            return consumeType.getItemDamage() == input.getItemDamage();
         }
         
         public int getID() {

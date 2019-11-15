@@ -32,16 +32,21 @@ import cn.academy.ability.api.AbilityAPIExt._
 class BloodRetroContext(p: EntityPlayer) extends Context(p, BloodRetrograde) {
 
   var tick = 0
+  var maxTick = lerpf(35f, 20f, ctx.getSkillExp)
 
   @Listener(channel=MSG_KEYUP, side=Array(Side.CLIENT))
   def l_keyUp() = {
-    val trace: RayTraceResult = Raytrace.traceLiving(p, 2)
-    trace.typeOfHit match {
-      case RayTraceResult.Type.ENTITY =>
-        sendToServer(MSG_PERFORM, trace.entityHit.asInstanceOf[EntityLivingBase])
-      case _ =>
-        terminate()
+    if (tick>=maxTick) {
+      val trace: RayTraceResult = Raytrace.traceLiving(p, 2)
+      trace.typeOfHit match {
+        case RayTraceResult.Type.ENTITY =>
+          sendToServer(MSG_PERFORM, trace.entityHit.asInstanceOf[EntityLivingBase])
+        case _ =>
+          terminate()
+      }
     }
+    else
+      terminate()
   }
 
   @Listener(channel=MSG_PERFORM, side=Array(Side.SERVER))
@@ -62,8 +67,8 @@ class BloodRetroContext(p: EntityPlayer) extends Context(p, BloodRetrograde) {
 
     player.capabilities.setPlayerWalkSpeed(lerpf(0.1f, 0.007f, clampf(0, 1, tick / 20.0f)))
 
-    if (tick >= 30.0f) {
-      l_keyUp()
+    if (tick >= 120.0f) {
+      terminate()
     }
   }
 
