@@ -26,16 +26,17 @@ public class ItemMedicineBottle extends ItemMedicineBase {
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items){
         List<ItemStack> list = items;
-
-        list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Mild
+        if (isInCreativeTab(tab))
+        {
+            list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Mild
                 , 1.0f, Properties.instance.Apply_Instant_Incr, 0.5f)));
-        list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Weak
-                , 1.0f, Properties.instance.Apply_Instant_Incr, 0.5f)));
-        list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Normal
-                , 1.0f, Properties.instance.Apply_Instant_Incr, 0.5f)));
-        list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Strong
-                , 2.0f, Properties.instance.Apply_Instant_Decr, 0.5f)));
-
+            list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Weak
+                    , 1.0f, Properties.instance.Apply_Instant_Incr, 0.5f)));
+            list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Normal
+                    , 1.0f, Properties.instance.Apply_Instant_Incr, 0.5f)));
+            list.add(create(new MedicineApplyInfo(Properties.instance.Targ_Life, Properties.instance.Str_Strong
+                    , 2.0f, Properties.instance.Apply_Instant_Decr, 0.5f)));
+        }
 
     }
 }
