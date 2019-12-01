@@ -135,6 +135,12 @@ public class ItemACArmor  extends ItemArmor implements ImagEnergyItem, ISpecialA
         return false;
     }
 
+
+    @Override
+    public EntityEquipmentSlot getEquipmentSlot(ItemStack stack)
+    {
+        return armorType;
+    }
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world,
