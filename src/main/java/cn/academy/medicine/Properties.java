@@ -14,7 +14,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import org.lwjgl.util.Color;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +35,7 @@ public class Properties {
     public abstract class Target extends Property {
         public abstract void apply(EntityPlayer player, MedicineApplyInfo data);
 
-        public Color baseColor;
+        //public Color baseColor;
         public float medSensitiveRatio;
         String id;
 
@@ -132,7 +131,7 @@ public class Properties {
         }
         {
             id = "life";
-            baseColor = new Color(255,0,0);
+            //baseColor = new Color(255,0,0);
             medSensitiveRatio = 0.05f;
         }
     };
@@ -160,7 +159,7 @@ public class Properties {
         }
         {
             id = "cp";
-            baseColor = new Color(0,0,255);
+            //baseColor = new Color(0,0,255);
             medSensitiveRatio = 0.05f;
         }
     };
@@ -186,7 +185,7 @@ public class Properties {
         }
         {
             id = "overload";
-			baseColor =  new Color(255,255,0);
+			//baseColor =  new Color(255,255,0);
 			medSensitiveRatio = 0.05f;
 		}
     };
@@ -219,7 +218,7 @@ public class Properties {
 
         {
 			id = "jump";
-			baseColor =  new Color(255,255,255);
+			//baseColor =  new Color(255,255,255);
 			medSensitiveRatio = 0.03f;
 		}
     };
@@ -249,7 +248,7 @@ public class Properties {
 
         {
 			id = "cooldown";
-			baseColor =  new Color(0,0,255);
+			//baseColor =  new Color(0,0,255);
 			medSensitiveRatio = 0.1f;
 		}
     };
@@ -281,7 +280,7 @@ public class Properties {
         }
         {
             id = "move_speed";
-            baseColor =  new Color(255,255,255);
+            //baseColor =  new Color(255,255,255);
             medSensitiveRatio = 0.3f;
         }
     };
@@ -305,7 +304,7 @@ public class Properties {
         }
         {
 			id = "disposed";
-			baseColor =  new Color(0,0,0);
+			//baseColor =  new Color(0,0,0);
 			medSensitiveRatio = 0.5f;
 		}
     };
@@ -347,7 +346,7 @@ public class Properties {
         {
             id = "attack";
             medSensitiveRatio = 0;
-			baseColor =  new Color(255,0,255);
+			//baseColor =  new Color(255,0,255);
 		}
     };
 

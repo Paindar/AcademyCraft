@@ -18,9 +18,9 @@ public class MedicineApplyInfo{
         this.method=method;
         this.sensitiveRatio=sensitiveRatio;
 
-        float[] hsb = toHSB(target.baseColor);
-        hsb[2] = Math.min(1f, strengthModifier * 0.6666f);
-        displayColor=fromHSB(hsb);
+        //float[] hsb = toHSB(target.baseColor);
+        //hsb[2] = Math.min(1f, strengthModifier * 0.6666f);
+        //displayColor=fromHSB(hsb);
     }
 
 
