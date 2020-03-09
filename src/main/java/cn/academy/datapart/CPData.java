@@ -413,7 +413,9 @@ public class CPData extends DataPart<EntityPlayer> {
         AbilityData data = AbilityData.get(getEntity());
 
         this.maxCP = getInitCP(data.getLevel());
+        this.addMaxCP = 0;
         this.maxOverload = getInitOverload(data.getLevel());
+        this.addMaxOverload = 0;
 
         curCP = getMaxCP();
         curOverload = 0;

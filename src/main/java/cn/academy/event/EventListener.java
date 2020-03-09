@@ -152,10 +152,10 @@ public class EventListener {
         {
             CPData cpData = CPData.get((EntityPlayer) event.getEntityLiving());
             double cpLoss = cpData.getAddMaxCP()*loseCPPercent + loseCPAmount;
-            double overloadLoss = cpData.getMaxOverload()*loseOLPercent + loseOLAmount;
-            if(cpLoss>0)
+            double overloadLoss = cpData.getAddMaxOverload()*loseOLPercent + loseOLAmount;
+            if((cpData.getAddMaxCP() - cpLoss)>0)
                 cpData.setAddMaxCP((float) (cpData.getAddMaxCP() - cpLoss));
-            if(overloadLoss>0)
+            if((cpData.getAddMaxOverload() - overloadLoss)>0)
                 cpData.setAddMaxOverload((float) (cpData.getAddMaxOverload() - overloadLoss));
         }
     }
