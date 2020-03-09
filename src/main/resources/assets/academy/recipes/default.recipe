@@ -294,3 +294,21 @@ shaped(academy:cons_armor_boots){
     [nil, nil,   nil]
 }
 
+shaped(academy:rev_processor){
+    [nil, academy:matter_unit, nil]
+    [academy:crystal_normal, academy:machine_frame, academy:reinforced_iron_plate]
+    [academy:calc_chip, academy:energy_convert_component,   redstone]
+}
+
+shaped(academy:mat_extractor){
+    [nil, academy:empty_med_bottle, nil]
+    [academy:crystal_normal, academy:machine_frame, academy:reinforced_iron_plate]
+    [academy:calc_chip, academy:energy_convert_component,   redstone]
+}
+
+shaped(academy:medicine_synthesizer){
+    [nil, academy:empty_med_bottle, nil]
+    [academy:crystal_pure, academy:machine_frame, academy:reinforced_iron_plate]
+    [academy:data_chip, academy:energy_convert_component,   redstone]
+}
+
