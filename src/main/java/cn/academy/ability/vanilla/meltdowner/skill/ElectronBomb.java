@@ -46,29 +46,39 @@ public class ElectronBomb extends Skill {
             super(_player, Instance);
         }
 
+        private boolean consume(){
+            float  exp = ctx.getSkillExp();
+            float overload = MathUtils.lerpf(16, 13, exp);
+            float cp = MathUtils.lerpf(35, 80, exp);
+            return ctx.consume(overload, cp)
+        }
+
         @Listener(channel = MSG_MADEALIVE, side = Side.SERVER)
         private void s_Execute() {
-            float exp = ctx.getSkillExp();
-            EntityMdBall ball = new EntityMdBall(
-                player,
-                ctx.getSkillExp() > 0.8f ? LifeImproved : Life,
-                target -> {
-                    RayTraceResult trace = Raytrace.perform(player.world, new Vec3d(target.posX, target.posY + player.eyeHeight, target.posZ),
-                        getDest(player), EntitySelectors.exclude(player).and(EntitySelectors.of(EntityMdBall.class).negate()));
-                    if (trace != null && trace.entityHit != null)
-                        MDDamageHelper.attack(ctx, trace.entityHit, getDamage(exp));
+            if (consume())
+            {
+                float exp = ctx.getSkillExp();
+                EntityMdBall ball = new EntityMdBall(
+                    player,
+                    ctx.getSkillExp() > 0.8f ? LifeImproved : Life,
+                    target -> {
+                        RayTraceResult trace = Raytrace.perform(player.world, new Vec3d(target.posX, target.posY + player.eyeHeight, target.posZ),
+                            getDest(player), EntitySelectors.exclude(player).and(EntitySelectors.of(EntityMdBall.class).negate()));
+                        if (trace != null && trace.entityHit != null)
+                            MDDamageHelper.attack(ctx, trace.entityHit, getDamage(exp));
 
-                    NetworkMessage.sendToAllAround(
-                        TargetPoints.convert(player, 20),
-                        EffectDelegate.Instance,
-                        MsgEffect,
-                        target
-                    );
-                });
-            player.world.spawnEntity(ball);
+                        NetworkMessage.sendToAllAround(
+                            TargetPoints.convert(player, 20),
+                            EffectDelegate.Instance,
+                            MsgEffect,
+                            target
+                        );
+                    });
+                player.world.spawnEntity(ball);
 
-            ctx.addSkillExp(.005f);
-            ctx.setCooldown((int) MathUtils.lerpf(20, 10, exp));
+                ctx.addSkillExp(.005f);
+                ctx.setCooldown((int) MathUtils.lerpf(20, 10, exp));
+            }
             terminate();
         }
 
