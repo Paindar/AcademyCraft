@@ -50,7 +50,7 @@ public class ElectronBomb extends Skill {
             float  exp = ctx.getSkillExp();
             float overload = MathUtils.lerpf(16, 13, exp);
             float cp = MathUtils.lerpf(35, 80, exp);
-            return ctx.consume(overload, cp)
+            return ctx.consume(overload, cp);
         }
 
         @Listener(channel = MSG_MADEALIVE, side = Side.SERVER)
