@@ -1,41 +1,29 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots"
-        }
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-
-apply plugin: 'scala'
-apply plugin: 'idea'
-apply plugin: 'maven'
-
-ext.configFile = file "build.properties"
-configFile.withReader {
-	def prop = new Properties()
-	prop.load(it)
-	project.ext.config = new ConfigSlurper().parse prop
+plugins {
+    id 'scala'
+    id 'maven-publish'
+    id 'idea'
 }
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-version = config.mod_ver
-group = config.mod_group 
-archivesBaseName = config.mod_name
-if(System.getenv()['BRANCH']!=null && System.getenv()['BRANCH']!='master')
-{
-    archivesBaseName+=("-"+System.getenv()['BRANCH'])
-    ext.subver=System.getenv()['TRAVIS_COMMIT'][0..6]
-    version+=('-'+ext.subver)
-}
-ext.usr = "$System.env.USR"
-ext.pswd = "$System.env.PSWD"
+def scala_version = String.valueOf(getProperty("scala_version"))
+def forge_version = String.valueOf(getProperty("forge_ver"))
+def mc_version = String.valueOf(getProperty("mc_ver"))
+def llib_version = String.valueOf(getProperty("llib_version"))
+def ccl_version = String.valueOf(getProperty("ccl_ver"))
+def jei_version = String.valueOf(getProperty("jei_ver"))
+version =  String.valueOf(getProperty("mod_ver"))
+group = "cn.academy" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "AcademyCraft"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -46,23 +34,33 @@ compileJava.options.encoding = "UTF-8"
 compileScala.options.encoding = "UTF-8"
 
 minecraft {
-    version = "1.12.2-14.23.5.2768"
-    runDir = "run"
+    mappings channel: 'snapshot', version: '20180814-1.12'
+    runs {
+        client {
+            workingDirectory project.file('run')
 
-    // the mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   snapshot are built nightly.
-    // stable_#            stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20180814"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-    // Replacing stuff in the source
-    // Currently stale, see mySourcesJava task
-	replace "@VERSION@", config.mod_ver
-    replace "@LAMBDA_LIB_VERSION@", config.lambdalib_ver
-    replace "@MC_VERSION@", config.mc_ver
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'info'
+            property "mixin.debug", "true"
+            property 'fml.coreMods.load', 'cn.lambdalib2.CorePlugin'
 
+        }
+
+        server {
+            workingDirectory project.file('run-server')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'info'
+            property 'fml.coreMods.load', 'cn.lambdalib2.CorePlugin'
+
+        }
+    }
 }
 
 repositories {
@@ -94,8 +92,6 @@ repositories {
 
 configurations {
     provided
-    shade
-    compile.extendsFrom shade
 }
 
 // sourceSets.main.compileClasspath += [configurations.provided]
@@ -105,86 +101,69 @@ idea {
         scopes.PROVIDED.plus += [configurations.provided]
     }
 }
-
-
 dependencies {
-    deobfCompile "cn.lambdalib2:LambdaLib2:${config.lambdalib_ver}"
-    deobfCompile "codechicken:CodeChickenLib:1.12.2-${config.ccl_ver}:universal"
-    deobfCompile "mezz.jei:jei_1.12.2:4.8.0.119"
-    //deobfCompile "codechicken:NotEnoughItems:1.12.2-${config.nei_ver}:universal"
-    deobfCompile "cofh:RedstoneFlux:1.12-2.0.0.1:universal"
-    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.9.6"
-    deobfCompile "CraftTweaker2:CraftTweaker2-API:4.1.9.6"
-    deobfCompile "CraftTweaker2:ZenScript:4.1.9.6"
-    deobfCompile "net.industrial-craft:industrialcraft-2:2.8.90-ex112"
+    minecraft("net.minecraftforge:forge:${mc_version}-${forge_version}")
+    // https://mvnrepository.com/artifact/org.scala-lang/scala-library
+    compile (group: 'org.scala-lang', name: 'scala-library', version: scala_version)
+    compile(group:"cn.lambdalib2", name: "LambdaLib2",version:llib_version)
 
-    // shade "org.apache.httpcomponents:httpclient:4.3.3"
-    // shade "org.apache.httpcomponents:httpcore:4.3.2" // dependency of httpclient
-    // shade "commons-logging:commons-logging:1.1.3" // dependency of httpclient
-    // shade "commons-codec:commons-codec:1.6" // dependency of commons-logging
+    compileOnly fg.deobf(group:"codechicken", name:"CodeChickenLib",version:"1.12.2-${ccl_version}",classifier:"universal")
+    compileOnly fg.deobf("mezz.jei:jei_1.12.2:${jei_version}:api")
+    compileOnly fg.deobf( "cofh:RedstoneFlux:1.12-2.0.0.1:universal")
+    compileOnly fg.deobf( "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.9.6")
+    compileOnly fg.deobf( "CraftTweaker2:CraftTweaker2-API:4.1.9.6")
+    compileOnly fg.deobf( "CraftTweaker2:ZenScript:4.1.9.6")
+    compileOnly fg.deobf("net.industrial-craft:industrialcraft-2:2.8.90-ex112")
+    //compileOnly fg.deobf(group:"net.industrial-craft",name:"industrialcraft-2",version:"2.8.90-ex112")
+
 }
 
 //sourceSets.main.compileClasspath += [configurations.provided]
 
 sourceSets.main {
     java.srcDirs = []
-    scala.srcDirs = ['src/main/scala', 'build/tempSourcesJava']
+    scala.srcDirs = [file('build/tempSourcesJava'), file('src/main/scala')]
 }
 
 idea {
     module{
         scopes.PROVIDED.plus += [configurations.provided]
         sourceDirs = [file('src/main/java'), file('src/main/scala')]
+        resourceDirs = [file('src/main/resources')]
     }
 }
 
 processResources {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
+    // copy everything else except the mcmod.info
+    project.logger.info(String.valueOf(sourceSets.main.resources.srcDirs))
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-
-    // copy everything else except the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
     }
 }
 
 compileJava.options.encoding = "UTF-8"
 compileScala.options.encoding = "UTF-8"
 
-task deobfJar(type: Jar, dependsOn: 'jar') {
-    classifier 'dev'
-    from sourceSets.main.output
+task sourcesJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.scala.srcDirs
 }
 
 jar {
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)){
-            exclude 'META-INF', 'META-INF/**'
-        }
+    manifest {
+        attributes([
+                "Specification-Title"     : project.name,
+                "Specification-Vendor"    : "Lambda Innovation",
+                "Specification-Version"   : 1, // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "Lambda Innovation",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
 }
 
-// http://www.minecraftforge.net/forum/topic/36791-trying-to-shade-dependencies-into-jar/
-reobf {
-    jar {
-        // WARN: You can't shade apache httplib for several reasons
-        // 1. it introduces some transitive dependencies, including logging, which is no good
-        // 2. logging exploits a bug for srg (all .class calls' package names aren't transformed at all)
 
-        // extraLines "PK: org/apache/commons/codec cn/academy/shade/org/apache/commons/codec"
-        // extraLines "PK: org/apache/http cn/academy/shade/org/apache/http"
-        // extraLines "PK: org/apache/commons/logging cn/academy/shade/org/apache/commons/logging"
-    }
-}
 
 import org.apache.tools.ant.filters.ReplaceTokens
 
@@ -195,17 +174,31 @@ task mySourcesJava(type: Copy) {
     from 'src/main/java'
     into 'build/tempSourcesJava'
     filteringCharset = 'UTF-8'
-    filter(ReplaceTokens, tokens: [VERSION: config.mod_ver])
-    filter(ReplaceTokens, tokens: [LAMBDA_LIB_VERSION: "[" + config.lambdalib_ver + "]"])
-    filter(ReplaceTokens, tokens: [MC_VERSION: config.mc_ver])
+    filter(ReplaceTokens, tokens: [VERSION: version])
+    filter(ReplaceTokens, tokens: [LAMBDA_LIB_VERSION: "[" + llib_version + "]"])
+    filter(ReplaceTokens, tokens: [MC_VERSION: "1.12.2"])
 }
 
 compileScala.dependsOn mySourcesJava
-retromapReplacedMain.dependsOn compileScala
-extractRangemapReplacedMain.dependsOn compileScala
 
-artifacts {
-    archives deobfJar
+// Example configuration to allow publishing using the maven-publish task
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('reobfJar')
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+publish.dependsOn('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourcesJar
+        }
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            url "file:///$buildDir/libs"
+        }
+    }
 }
-    
-install.dependsOn build
+

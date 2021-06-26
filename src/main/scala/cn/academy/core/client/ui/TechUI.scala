@@ -644,6 +644,8 @@ object WirelessPage {
                   override def name: String = matrix.ssid
                   override def encrypted = matrix.encrypted
                 }
+                case (_,None)=>
+                  null
             }
 
           rebuildPage(ret.window, linked, avail)

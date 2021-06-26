@@ -103,7 +103,7 @@ class ThunderBoltContext(p: EntityPlayer) extends Context(p, ThunderBolt) {
     } else {
       end = result.hitVec
       if(result.typeOfHit == RayTraceResult.Type.ENTITY) {
-        end = end.add(0, result.entityHit.getEyeHeight, 0)
+        end = end.add(new Vec3d(0, result.entityHit.getEyeHeight, 0))
       }
     }
 
