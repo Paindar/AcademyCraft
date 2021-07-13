@@ -35,7 +35,7 @@ import java.util.Map.Entry;
  * @author acaly, WeathFolD, KS
  *
  */
-@Mod(modid = "academy", name = "AcademyCraft", version = AcademyCraft.VERSION,
+@Mod(modid = "academycraft_unofficial", name = "AcademyCraft Unofficial", version = AcademyCraft.VERSION,
      dependencies = "required-after:lambdalib2@@LAMBDA_LIB_VERSION@")
 @RegistryMod(rootPackage = "cn.academy.", resourceDomain = "academy")
 public class AcademyCraft {
@@ -67,7 +67,7 @@ public class AcademyCraft {
 
     @StateEventCallback(priority = 1)
     private static void preInit(FMLPreInitializationEvent event) {
-        log.info("Starting AcademyCraft");
+        log.info("Starting AcademyCraft Unoffical");
         log.info("Copyright (c) Lambda Innovation, 2013-2018");
         log.info("https://ac.li-dev.cn/");
         recipes = new RecipeRegistry();

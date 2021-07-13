@@ -1,12 +1,12 @@
 [
 {
-  "modid": "academy",
-  "name": "Academy Craft",
+  "modid": "academycraft_unofficial",
+  "name": "Academy Craft Unofficial",
   "description": "A mod about superability. Become an ESPer and alter your reality in Minecraft!",
   "version": "${version}",
   "url": "https://ac.li-dev.cn/",
   "updateUrl": "",
-  "authorList": ["Lambda Innovation"],
+  "authorList": ["Lambda Innovation","Paindar"],
   "credits": "All the players of the mod, like you",
   "logoFile": "logo.png",
   "screenshots": [],
